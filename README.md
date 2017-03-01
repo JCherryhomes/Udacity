@@ -1,3 +1,4 @@
-## UDACITY NANODEGREE PROGRAM
 
-#### Full Stack Web Development
+# UDACITY NANODEGREE PROGRAM
+
+## Full Stack Web Development
