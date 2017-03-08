@@ -1,6 +1,5 @@
 import os
 
-
 def rename_files():
     current_directory = os.path.dirname(__file__)
     working_directory = os.path.join(current_directory, "prank")
