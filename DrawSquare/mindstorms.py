@@ -1,4 +1,4 @@
-import turtle
+from turtle import Turtle, Screen
 
 def draw_lines(turtle_instance, distance, angle, corners):
     for index in range(0, corners):
@@ -39,7 +39,7 @@ def draw_triangle(triangle):
     draw_lines(triangle, -150, 120, 3)
 
 def draw_shapes():    
-    window = turtle.Screen()    
+    window = Screen()    
     window.bgcolor("red")
     
     # circle = turtle.Turtle()
@@ -56,14 +56,14 @@ def draw_shapes():
     
     # draw_triangle(triangle)
 
-    j = turtle.Turtle()
+    j = Turtle()
     j.shape("circle")
     j.color("blue")
     j.speed(5)
     j.width(2)
     j.setx(-25)
 
-    c = turtle.Turtle()
+    c = Turtle()
     c.shape("circle")
     c.color("blue")
     c.speed(5)
