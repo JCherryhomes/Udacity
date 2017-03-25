@@ -33,10 +33,6 @@
             margin-bottom: 20px;
             padding-top: 20px;
         }
-        .movie-tile:hover {
-            background-color: #EEE;
-            cursor: pointer;
-        }
         .scale-media {
             padding-bottom: 56.25%;
             position: relative;
@@ -49,6 +45,32 @@
             left: 0;
             top: 0;
             background-color: white;
+        }
+        .box-shadow {
+            position: relative;
+
+            transition: all 0.25s linear, 
+                        top 0.25s linear,
+                        left 0.25s linear;
+    -webkit-transition: all 0.25s linear, 
+                        top 0.25s linear,
+                        left 0.25s linear
+       -moz-transition: all 0.25s linear, 
+                        top 0.25s linear,
+                        left 0.25s linear
+         -o-transition: all 0.25s linear, 
+                        top 0.25s linear,
+                        left 0.25s linear
+            box-shadow: 0 0 5px #888888;
+            
+            top: 0;
+            left: 0;
+            cursor: pointer;
+        }
+        .box-shadow:hover {
+            box-shadow: 15px 15px 10px #aaaaaa;
+            top: -15px;
+            left: -15px;
         }
     </style>
     <script type="text/javascript" charset="utf-8">
@@ -94,7 +116,7 @@
 
     <!-- Main Page Content -->
     <div class="container">
-      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
           <div class="navbar-header">
             <a class="navbar-brand" href="#">Fresh Tomatoes Movie Trailers</a>
@@ -105,32 +127,32 @@
     <div class="container">
       
 <div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="sGbxmsDFVnE" data-toggle="modal" data-target="#trailer">
-    <img src="https://upload.wikimedia.org/wikipedia/en/a/a2/Star_Wars_The_Force_Awakens_Theatrical_Poster.jpg" width="220" height="342">
+    <img src="https://upload.wikimedia.org/wikipedia/en/a/a2/Star_Wars_The_Force_Awakens_Theatrical_Poster.jpg" width="220" height="342" class="box-shadow">
     <h2>Star Wars</h2>
 </div>
 
 <div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="uVdV-lxRPFo" data-toggle="modal" data-target="#trailer">
-    <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Captain_America_Civil_War_poster.jpg" width="220" height="342">
+    <img src="https://upload.wikimedia.org/wikipedia/en/5/53/Captain_America_Civil_War_poster.jpg" width="220" height="342" class="box-shadow">
     <h2>Captain America</h2>
 </div>
 
 <div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="gbug3zTm3Ws" data-toggle="modal" data-target="#trailer">
-    <img src="https://upload.wikimedia.org/wikipedia/en/3/37/Logan_2017_poster.jpg" width="220" height="342">
+    <img src="https://upload.wikimedia.org/wikipedia/en/3/37/Logan_2017_poster.jpg" width="220" height="342" class="box-shadow">
     <h2>Logan</h2>
 </div>
 
 <div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="mNpDVccI5Ew" data-toggle="modal" data-target="#trailer">
-    <img src="https://upload.wikimedia.org/wikipedia/en/e/ed/Wonder_Woman_%282017_film%29.jpg" width="220" height="342">
+    <img src="https://upload.wikimedia.org/wikipedia/en/e/ed/Wonder_Woman_%282017_film%29.jpg" width="220" height="342" class="box-shadow">
     <h2>Wonder Woman</h2>
 </div>
 
 <div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="vwyZH85NQC4" data-toggle="modal" data-target="#trailer">
-    <img src="http://upload.wikimedia.org/wikipedia/en/1/13/Toy_Story.jpg" width="220" height="342">
+    <img src="http://upload.wikimedia.org/wikipedia/en/1/13/Toy_Story.jpg" width="220" height="342" class="box-shadow">
     <h2>Toy Store</h2>
 </div>
 
 <div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="-9ceBgWV8io" data-toggle="modal" data-target="#trailer">
-    <img src="http://upload.wikimedia.org/wikipedia/id/b/b0/Avatar-Teaser-Poster.jpg" width="220" height="342">
+    <img src="http://upload.wikimedia.org/wikipedia/id/b/b0/Avatar-Teaser-Poster.jpg" width="220" height="342" class="box-shadow">
     <h2>Avatar</h2>
 </div>
 

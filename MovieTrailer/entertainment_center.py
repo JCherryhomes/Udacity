@@ -39,7 +39,4 @@ movies = [
         "https://www.youtube.com/watch?v=-9ceBgWV8io")
 ]
 
-# tomato.open_movies_page(movies)
-print(Movie.__doc__)
-print(Movie.__name__)
-print(Movie.__module__)
+tomato.open_movies_page(movies)

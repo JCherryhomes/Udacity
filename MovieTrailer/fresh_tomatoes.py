@@ -39,10 +39,6 @@ main_page_head = '''
             margin-bottom: 20px;
             padding-top: 20px;
         }
-        .movie-tile:hover {
-            background-color: #EEE;
-            cursor: pointer;
-        }
         .scale-media {
             padding-bottom: 56.25%;
             position: relative;
@@ -55,6 +51,32 @@ main_page_head = '''
             left: 0;
             top: 0;
             background-color: white;
+        }
+        .box-shadow {
+            position: relative;
+
+            transition: all 0.25s linear, 
+                        top 0.25s linear,
+                        left 0.25s linear;
+    -webkit-transition: all 0.25s linear, 
+                        top 0.25s linear,
+                        left 0.25s linear
+       -moz-transition: all 0.25s linear, 
+                        top 0.25s linear,
+                        left 0.25s linear
+         -o-transition: all 0.25s linear, 
+                        top 0.25s linear,
+                        left 0.25s linear
+            box-shadow: 0 0 5px #888888;
+            
+            top: 0;
+            left: 0;
+            cursor: pointer;
+        }
+        .box-shadow:hover {
+            box-shadow: 15px 15px 10px #aaaaaa;
+            top: -15px;
+            left: -15px;
         }
     </style>
     <script type="text/javascript" charset="utf-8">
@@ -104,7 +126,7 @@ main_page_content = '''
 
     <!-- Main Page Content -->
     <div class="container">
-      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
           <div class="navbar-header">
             <a class="navbar-brand" href="#">Fresh Tomatoes Movie Trailers</a>
@@ -123,7 +145,7 @@ main_page_content = '''
 # A single movie entry html template
 movie_tile_content = '''
 <div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
-    <img src="{poster_image_url}" width="220" height="342">
+    <img src="{poster_image_url}" width="220" height="342" class="box-shadow">
     <h2>{movie_title}</h2>
 </div>
 '''
