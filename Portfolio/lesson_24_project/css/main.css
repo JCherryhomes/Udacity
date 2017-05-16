@@ -17,7 +17,7 @@ body {
 }
 
 article {
-
+  max-width: 1024px;
 }
 
 h1 {
@@ -25,5 +25,5 @@ h1 {
 }
 
 img {
-
+  max-width: 100%;
 }
