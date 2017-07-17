@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>.error { height: 20px; line-height: 20px; color: red; }</style>
+<form method="POST">
+	<h2>/ascii/</h2>
+	<label for="title">
+		<div>title</div>
+		<input type="text" name="title" value="{{title}}" />
+	</label>
+	<label for="ascii">
+		<div>art</div>
+		<textarea name="ascii">{{ascii}}</textarea>
+	</label>
+	<div class="error">{{ error }}</div>
+	<input type="submit">
+</form>
+
+{% for art in arts %}
+<div class="art">
+	<div class="art-title">{{art.title}}</div>
+	<pre class="art-body">{{art.ascii}}</pre>
+</div>
+{% endfor %}
+{% endblock %}
