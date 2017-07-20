@@ -66,7 +66,7 @@ class MainPage(Handler):
 		user_cookie = self.request.cookies.get('user')
 
 		if not user_cookie:
-			self.redirect("/signup")
+			self.redirect("/login")
 		else:
 			strings = user_cookie.split('|')
 			id = int(strings[0])
@@ -109,12 +109,22 @@ class SignupPage(Handler):
 			verify_error = "Your passwords didn't match"
 
 		if valid_email(email) and valid_username(username) and valid_verify(password, verify):
+			user = User.gql("WHERE username = :1", username)
+			if user:
+				self.render(
+					"signup.html", 
+					username = username, 
+					username_error = "Username not available", 
+					password_error = password_error, 
+					email_error = email_error,
+					verify_error = verify_error)
+
 			user = User(username=username, password=password)
 			user.put()
 
 			id = user.key().id()
 			hash = make_pw_hash(username, password)
-			self.response.headers.add_header('Set-Cookie', 'user=%s|%s; Path=/' % (str(id), hash))
+			self.response.headers.add_header('Set-Cookie', 'user=%s|%s; Path=/' % (id, hash))
 			self.redirect("/")
 			
 		else:
@@ -126,6 +136,45 @@ class SignupPage(Handler):
 				email_error = email_error,
 				verify_error = verify_error)
 
+class LoginPage(Handler):
+	def get(self):
+		self.render("login.html")
+
+	def post(self):
+		username_error = ""
+		password_error = ""
+		
+		username = self.request.get("username")
+		password = self.request.get("password")
+
+		if not valid_username(username):
+			username_error = "Username is invalid"
+
+		if not valid_password(password):
+			password_error = "Password is not valid"
+
+		if username_error == "" and password_error == "":
+			q = db.GqlQuery("SELECT * FROM User WHERE username = :username", username=username)
+			user = q.get()
+			hash = make_pw_hash(username, password)
+
+			if password != user.password:
+				self.render(
+					"login.html", 
+					username = username, 
+					password_error = "Username and password do not match")
+
+			self.response.headers.add_header('Set-Cookie', 'user=%s|%s; Path=/' % (str(user.key().id()), hash))
+			self.redirect("/")
+			
+		else:
+			self.render(
+				"login.html", 
+				username = username, 
+				username_error = username_error, 
+				password_error = password_error)
+
 app = webapp2.WSGIApplication([
 	('/', MainPage),
-	('/signup', SignupPage)], debug=True)
+	('/signup', SignupPage),
+	("/login", LoginPage)], debug=True)
