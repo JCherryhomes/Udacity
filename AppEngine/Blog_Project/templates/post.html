@@ -1,0 +1,66 @@
+{% extends "base.html" %} {% block content %} {% if post %}
+
+<form action="/like/{{post.key.id()}}" method="POST">
+	<h3>{{post.title}}</h3>
+	<h5 class="small inline">By: {{user.username}}
+		{% if post.user == current_user.key %}
+			<button type="submit" class="btn btn-info" title="Clike to like" disabled title="You cannot like your own post">
+				<span class="fa fa-heart-o"></span>
+				<span title="Likes">{{ like_count }}</span>
+			</button>
+		{% else %}
+			{% if not like %}
+			<button type="submit" class="btn btn-info" title="Clike to like">
+				<span class="fa fa-heart-o"></span>
+				<span title="Likes">{{ like_count }}</span>
+			</button>
+			{% else %}
+			<button type="submit" class="btn btn-info" title="Click to unlike">
+				<span class="fa fa-heart"></span>
+				<span title="Likes">{{ like_count }}</span>
+			</button>
+			{% endif %}
+		{% endif %}
+	</h5>
+</form>
+<p>
+	{{post.content}}
+</p>
+{% if current_user.key == post.user %}
+<a class="btn btn-outline-warning" href="/editpost/{{post.key.id()}}" title="Edit Post">
+	<span class="fa fa-edit"></span>
+</a> {% endif %}
+<hr/>
+<div>
+	<h5 class="text-primary">Comments</h5>
+	{% if current_user %}
+	<form method="POST">
+		<div class="form-group">
+			<textarea class="form-control" name="content" id="comment" rows="3"></textarea>
+		</div>
+		<button type="submit" class="btn btn-outline-success" title="Save Comment">
+			<span class="fa fa-comment"></span>
+		</button>
+		<span class="text-danger">{{error}}</span>
+	</form>
+	{% endif %}
+	<div class="comments">
+		{% for comment in comments %}
+			<p>{{ comment.content }}</p>
+			<span>{{comment.user.username}}</span>
+			{% if current_user and current_user.key == comment.user %}
+			<form action="/comment/{{comment.key.id()}}" class="form-inline" method="POST">
+				<a class="btn btn-outline-warning" href="/editcomment/{{comment.key.id()}}" title="Edit Comment">
+					<span class="fa fa-edit"></span>
+				</a>&nbsp;
+				<button type="submit" class="btn btn-outline-danger" title="Delete Comment">
+					<span class="fa fa-trash"></span>
+				</button>
+			</form>
+			{% endif %}
+			<hr>
+		{% endfor %}
+	</div>
+</div>
+{% endif %} {% if page_error %}
+<span class="text-danger">{{page_error}}</span> {% endif %} {% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Edit Comment</h2>
+
+<form method="POST">
+	<div class="form-group">
+		<label for="content">Comment</label>
+		<textarea class="form-control" rows="5" name="content">{{content}}</textarea>
+	</div>
+
+	<input type="submit" class="btn btn-outline-success" value="Save Comment">
+	<span class="text-danger">{{ error }}</span>
+</form>
+{% endblock %}

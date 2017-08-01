@@ -16,6 +16,10 @@ SECRET = 'imsosecret'
 USER_RE = re.compile(r"^[a-zA-Z0-9_-]{3,20}$")
 PASSWORD_RE = re.compile(r"^.{3,20}$")
 EMAIL_RE = re.compile(r"^[\S]+@[\S]+.[\S]+$")
+COOKIE_RE = re.compile(r'.+=;\s*Path=/')
+
+def valid_cookie(cookie):
+    return cookie and COOKIE_RE.match(cookie)
 
 def valid_username(username):
 	return USER_RE.match(username)
@@ -174,7 +178,13 @@ class LoginPage(Handler):
 				username_error = username_error, 
 				password_error = password_error)
 
+class LogoutPage(Handler):
+	def get(self):
+		self.response.headers.add_header('Set-Cookie', 'user=%s; Path=/' % "")
+		self.redirect("/signup")
+
 app = webapp2.WSGIApplication([
 	('/', MainPage),
 	('/signup', SignupPage),
-	("/login", LoginPage)], debug=True)
+	("/login", LoginPage),
+	("/logout", LogoutPage)], debug=True)
