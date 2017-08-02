@@ -1,10 +1,9 @@
+import models.helpers as h
 from models.Handler import Handler
 from models.Post import Post
 from models.User import User
 from models.Comment import Comment
 from models.Like import Like
-import models.helpers as h
-import time
 
 class PostPage(Handler):
     """
@@ -48,26 +47,31 @@ class PostPage(Handler):
         current_user = self.authenticate_user()
 
         post = Post.get_by_id(long(post_id))
-        user = User.get_by_id(post.user.id())
-        comments = Comment.query().filter(Comment.post == post.key).fetch()
 
-        if not content:
-            self.render("post.html",
-                comments=comments,
-                post=post,
-                current_user=current_user,
-                user=user,
-                error="No comment text was received")
+        if not post:
+            self.render("post404.html")
         else:
-            comment = Comment(content=content, user=current_user.key, post=post.key)
-            comment.put()
-            current_user.comments.append(comment.key)
-            current_user.put()
-            timestamp = str(time.time()).replace(".","")
+            user = User.get_by_id(post.user.id())
+            comments = Comment.query().filter(Comment.post == post.key).fetch()
 
-            self.render(
-                "post.html",
-                post=post,
-                user=user,
-                current_user=current_user,
-                comments=comments)
+            if not current_user:
+                self.redirect("/login")
+            elif not content:
+                self.render("post.html",
+                    comments=comments,
+                    post=post,
+                    current_user=current_user,
+                    user=user,
+                    error="No comment text was received")
+            else:
+                comment = Comment(content=content, user=current_user.key, post=post.key)
+                comment.put()
+                current_user.comments.append(comment.key)
+                current_user.put()
+
+                self.render(
+                    "post.html",
+                    post=post,
+                    user=user,
+                    current_user=current_user,
+                    comments=comments)

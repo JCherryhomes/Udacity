@@ -19,10 +19,14 @@ class CommentPage(Handler):
         user is the author of the comment
         '''
         current_user = self.authenticate_user()
-        comment = Comment.get_by_id(long(comment_id))
 
-        if comment and comment.user == current_user.key:
-            remove_user_comment(current_user, comment)
-            comment.key.delete()
+        if not current_user:
+            self.redirect("/login")
+        else:
+            comment = Comment.get_by_id(long(comment_id))
 
-        self.redirect(self.request.referer)
+            if comment and comment.user == current_user.key:
+                remove_user_comment(current_user, comment)
+                comment.key.delete()
+
+            self.redirect(self.request.referer)

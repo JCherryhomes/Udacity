@@ -13,15 +13,15 @@ class EditPostPage(Handler):
         """
         current_user = self.authenticate_user()
         post = Post.get_by_id(long(post_id))
-        user = post.user.id()
 
         if not current_user:
             self.redirect("/login")
         elif not post:
-            self.redirect("/post/" + str(post_id))
+            self.render("/post404.html")
         elif current_user.key != post.user:
             self.write("You are not the author of this post")
         else:
+            user = post.user.id()
             self.render(
                 "edit_post.html",
                 title=post.title,
@@ -51,7 +51,9 @@ class EditPostPage(Handler):
 
             post = Post.get_by_id(long(post_id))
 
-            if current_user.key != post.user:
+            if not post:
+                self.render("/post404.html")
+            elif current_user.key != post.user:
                 self.redirect("/post/" + str(post.key.id()))
             elif not content or not title:
                 self.render_front(post_id, error="We need both a title and content")
