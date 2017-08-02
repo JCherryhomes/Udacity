@@ -27,9 +27,15 @@
 	{{post.content}}
 </p>
 {% if current_user.key == post.user %}
-<a class="btn btn-outline-warning" href="/editpost/{{post.key.id()}}" title="Edit Post">
-	<span class="fa fa-edit"></span>
-</a> {% endif %}
+<form action="/deletepost/{{post.key.id()}}" class="form-inline" method="POST">
+	<a class="btn btn-outline-warning" href="/editpost/{{post.key.id()}}" title="Edit Post">
+		<span class="fa fa-edit"></span>
+	</a> &nbsp;
+	<button type="submit" class="btn btn-outline-danger" title="Delete Post">
+		<span class="fa fa-trash"></span>
+	</button>
+</form>
+{% endif %}
 <hr/>
 <div>
 	<h5 class="text-primary">Comments</h5>

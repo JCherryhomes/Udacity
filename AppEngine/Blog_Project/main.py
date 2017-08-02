@@ -10,11 +10,10 @@ from pages.EditPostPage import EditPostPage
 from pages.EditCommentPage import EditCommentPage
 from pages.LikePage import LikePage
 from pages.CommentPage import CommentPage
+from pages.DeletePostPage import DeletePostPage
 
 sys.path.append('/models')
 sys.path.append('/pages')
-
-X = "(\d+)"
 
 app = webapp2.WSGIApplication([
     ("/", MainPage),
@@ -26,6 +25,7 @@ app = webapp2.WSGIApplication([
     ("/editpost/(\d+)", EditPostPage),
     ("/editcomment/(\d+)", EditCommentPage),
     ("/like/(\d+)", LikePage),
-    ("/comment/(\d+)", CommentPage)], debug=True)
+    ("/comment/(\d+)", CommentPage),
+    ("/deletepost/(\d+)", DeletePostPage)], debug=True)
 
 app.config['TEMPLATES_AUTO_RELOAD'] = True
